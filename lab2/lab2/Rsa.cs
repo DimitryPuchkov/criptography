@@ -41,7 +41,7 @@ namespace lab2
             throw new Exception("Programm can't find e");
          
 
-         keys.Add("publlic", new List<Int64>(){n, e});
+         keys.Add("public", new List<Int64>(){n, e});
          keys.Add("private", new List<Int64>() { n, d });
          return keys;
       }
@@ -76,6 +76,35 @@ namespace lab2
             if (a % i == 0)
                return false;
          return true;
+      }
+      
+      public Int64 Encode(Int64 M, List<Int64> pubkey)
+      {
+         return FastPowFunc(M, pubkey[1], pubkey[0]);
+      }
+
+      public Int64 Decode(Int64 C, List<Int64> privatekey)
+      {
+         return FastPowFunc(C, privatekey[1], privatekey[0]);
+      }
+
+      public static Int64 FastPowFunc(Int64 Number, Int64 Pow, Int64 Mod)
+      {
+         Int64 Result = 1;
+         Int64 Bit = Number % Mod;
+
+         while (Pow > 0)
+         {
+            if ((Pow & 1) == 1)
+            {
+               Result *= Bit;
+               Result %= Mod;
+            }
+            Bit *= Bit;
+            Bit %= Mod;
+            Pow >>= 1;
+         }
+         return Result;
       }
    }
 }

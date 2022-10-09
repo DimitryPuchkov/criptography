@@ -16,7 +16,11 @@ namespace lab2
          q = Int64.Parse(Console.ReadLine());
          try
          {
-            rsa.GenKeys(p, q);
+            var keys = rsa.GenKeys(p, q);
+            Int64 M = 123456;
+            var C = rsa.Encode(M, keys["public"]);
+            var decM = rsa.Decode(C, keys["private"]);
+            Console.WriteLine(decM.ToString());
          }
          catch(Exception e)
          {
