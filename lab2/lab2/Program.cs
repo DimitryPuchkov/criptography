@@ -61,19 +61,19 @@ namespace lab2
 
       static void Decode(Rsa rsa)
       {
-         Int64 d, e, C;
+         Int64 d, n, C;
          Console.WriteLine("Input Private key");
+         Console.WriteLine("Input n:");
+         n = Int64.Parse(Console.ReadLine());
          Console.WriteLine("Input d:");
          d = Int64.Parse(Console.ReadLine());
-         Console.WriteLine("Input e:");
-         e = Int64.Parse(Console.ReadLine());
          Console.WriteLine("Input number for decode:");
          C = Int64.Parse(Console.ReadLine());
          try
          {
-            var M = rsa.Decode(C, new List<Int64>() { d, e });
-            Console.WriteLine("Encoded number:");
-            Console.WriteLine(C.ToString());
+            var M = rsa.Decode(C, new List<Int64>() { n, d });
+            Console.WriteLine("Decoded number:");
+            Console.WriteLine(M.ToString());
          }
          catch (Exception err)
          {
